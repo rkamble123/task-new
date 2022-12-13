@@ -1,14 +1,14 @@
 from rest_framework import serializers
-from .models import UserCreateModel , TopicsModel , CourseModel
+from .models import UserModel , TopicsModel , CourseModel
 
-class createUserSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     
     class Meta:
-        model = UserCreateModel
+        model = UserModel
         fields = '__all__'
 
     def create(self,valid_data):
-        return UserCreateModel.objects.create(**valid_data)
+        return UserModel.objects.create(**valid_data)
 
 
 
@@ -17,6 +17,16 @@ class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = CourseModel
         fields = '__all__'
+
+    def update(self, instance, validated_data):
+        print(instance.course_name)
+        instance.course_name = validated_data.get('course_name',instance.course_name)
+        print(instance.course_name)
+        instance.updated_date = validated_data.get('updated_date',instance.updated_date)
+        print(instance.updated_date)
+        instance.save()
+        return instance
+
 
     def create(self,valid_data):
         return CourseModel.objects.create(**valid_data)
@@ -38,6 +48,14 @@ class TopicSerializer(serializers.ModelSerializer):
 
     def create(self,valid_data):
         return TopicsModel.objects.create(**valid_data)
+
+    def update(self, instance, validated_data):
+        instance.course_name = validated_data.get('course_name',instance.course_name)
+        instance.topic_name = validated_data.get('toppic_name',instance.topic_name)
+        instance.topic_url = validated_data.get('toppic_name',instance.topic_name)
+        instance.update_date = validated_data.get('toppic_name',instance.topic_name)
+        instance.save()
+        return super().update(instance, validated_data)
 
     
 

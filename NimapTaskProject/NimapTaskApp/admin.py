@@ -1,9 +1,9 @@
 from django.contrib import admin
-from .models import CourseModel,TopicsModel,UserCreateModel
+from .models import CourseModel,TopicsModel,UserModel
 
 # Register your models here.
 
-admin.site.register(UserCreateModel)
+admin.site.register(UserModel)
 
 @admin.register(CourseModel)
 class CourseAdmin(admin.ModelAdmin):
