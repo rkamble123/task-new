@@ -51,11 +51,11 @@ class TopicSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         instance.course_name = validated_data.get('course_name',instance.course_name)
-        instance.topic_name = validated_data.get('toppic_name',instance.topic_name)
-        instance.topic_url = validated_data.get('toppic_name',instance.topic_name)
-        instance.update_date = validated_data.get('toppic_name',instance.topic_name)
+        instance.topic_name = validated_data.get('topic_name',instance.topic_name)
+        instance.topic_url = validated_data.get('topic_url',instance.topic_url)
+        instance.updated_date = validated_data.get('updated_date',instance.updated_date)
         instance.save()
-        return super().update(instance, validated_data)
+        return instance
 
     
 
